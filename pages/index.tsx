@@ -1,8 +1,8 @@
 import type { NextPage } from 'next'
-import { Box, Checkbox } from '@chakra-ui/react'
+import { TodoInput } from '../components/input'
 
 const Home: NextPage = () => {
-  return <Checkbox defaultChecked>Checkbox</Checkbox>
+  return <TodoInput />
 }
 
 export default Home
