@@ -1,8 +1,8 @@
 import type { NextPage } from 'next'
-import { TodoInput } from '../components/input'
+import { TextInput } from '../components/textInput'
 
 const Home: NextPage = () => {
-  return <TodoInput />
+  return <TextInput />
 }
 
 export default Home
