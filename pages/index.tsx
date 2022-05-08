@@ -23,6 +23,7 @@ const Home: NextPage = () => {
 
   return (
     <Container w="700px" margin="20px auto">
+      {/*  TODO: 文字列が入っていない時のバリデーションを追加する */}
       <Flex>
         <TextInput value={inputText} onChange={setInputValueToInputText} />
         <RoundedOutlineButton onClick={setInputTextToRecoilState} />

@@ -5,6 +5,7 @@ type Props = {
 }
 
 export const List: FC<Props> = ({ list }) => {
+  // TODO: 削除ボタンを追加する
   return (
     <ul>
       {list.map((e, i) => {
