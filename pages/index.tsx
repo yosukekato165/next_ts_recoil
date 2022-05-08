@@ -1,5 +1,5 @@
 import type { NextPage } from 'next'
-import { Flex } from '@chakra-ui/react'
+import { Container, Flex } from '@chakra-ui/react'
 import { useRecoilState } from 'recoil'
 import { textState } from '../recoil/todo'
 import { ChangeEvent, useState } from 'react'
@@ -20,15 +20,16 @@ const Home: NextPage = () => {
     setText({ todos: [...text.todos, inputText] })
     setInputText('')
   }
+
   return (
-    <>
+    <Container w="700px" margin="20px auto">
       <Flex>
         <TextInput value={inputText} onChange={setInputValueToInputText} />
         <RoundedOutlineButton onClick={setInputTextToRecoilState} />
       </Flex>
       <br />
       <List list={text.todos} />
-    </>
+    </Container>
   )
 }
 
