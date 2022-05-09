@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { FC, useCallback, useEffect, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCube } from '@fortawesome/free-solid-svg-icons'
 import { Box, Flex } from '@chakra-ui/react'
@@ -9,6 +9,19 @@ type Props = {
 
 export const List: FC<Props> = ({ list }) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
+
+  const escFunction = useCallback(
+    (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && isModalOpen) {
+        setIsModalOpen(false)
+      }
+    },
+    [isModalOpen]
+  )
+
+  useEffect(() => {
+    document.addEventListener('keydown', escFunction)
+  }, [escFunction])
 
   const openModal = () => {
     setIsModalOpen(true)
