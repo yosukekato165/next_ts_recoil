@@ -1,13 +1,16 @@
 import { FC, useCallback, useEffect, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCube } from '@fortawesome/free-solid-svg-icons'
-import { Box, Flex } from '@chakra-ui/react'
+import { faCube, faTrashCan } from '@fortawesome/free-solid-svg-icons'
+import { Box, ButtonGroup, Flex } from '@chakra-ui/react'
+import { useRecoilState } from 'recoil'
+import { textState } from '../recoil/todo'
 
 type Props = {
   list: string[]
 }
 
 export const List: FC<Props> = ({ list }) => {
+  const [text, setText] = useRecoilState(textState)
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   const escFunction = useCallback(
@@ -30,7 +33,16 @@ export const List: FC<Props> = ({ list }) => {
   const closeModal = () => {
     setIsModalOpen(false)
   }
-  // TODO: 削除ボタンを追加する
+  const removeItemAtIndex = (arr: any[], index: number) => {
+    return [...arr.slice(0, index), ...arr.slice(index + 1)]
+  }
+
+  const deleteTodo = (e: number) => {
+    const newTodos = removeItemAtIndex(text.todos, e)
+
+    setText({ todos: newTodos })
+  }
+
   return (
     <ul>
       {list.map((e, i) => {
@@ -38,9 +50,14 @@ export const List: FC<Props> = ({ list }) => {
           <li key={i}>
             <Flex justifyContent={'space-between'}>
               {i + 1}. {e}
-              <Box onClick={openModal} cursor="pointer">
-                <FontAwesomeIcon icon={faCube} />
-              </Box>
+              <ButtonGroup gap="2">
+                <Box onClick={openModal} cursor="pointer">
+                  <FontAwesomeIcon icon={faCube} />
+                </Box>
+                <Box onClick={() => deleteTodo(i)} cursor="pointer">
+                  <FontAwesomeIcon icon={faTrashCan} />
+                </Box>
+              </ButtonGroup>
             </Flex>
             <Box
               position="fixed"
