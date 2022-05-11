@@ -1,9 +1,7 @@
-import { FC, useCallback, useEffect, useState } from 'react'
+import { FC } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCube, faTrashCan } from '@fortawesome/free-solid-svg-icons'
 import { Box, ButtonGroup, Flex } from '@chakra-ui/react'
-import { useRecoilState } from 'recoil'
-import { textState } from '../recoil/todo'
 
 type Props = {
   list: string[]
@@ -12,8 +10,6 @@ type Props = {
 }
 
 export const List: FC<Props> = ({ list, openModal, deleteTodo }) => {
-  const [text, setText] = useRecoilState(textState)
-
   return (
     <ul>
       {list.map((e, i) => {
