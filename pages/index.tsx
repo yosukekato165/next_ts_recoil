@@ -73,8 +73,28 @@ const Home: NextPage = () => {
         display={isModalOpen ? 'block' : 'none'}
         bg="blue"
         opacity="0.3"
+        cursor="pointer"
         onClick={closeModal}
       />
+      <Box
+        position="fixed"
+        top="50%"
+        left="50%"
+        transform="translateX(-50%) translateY(-50%)"
+        w="700px"
+        h="400px"
+        border="solid 2px white"
+        borderRadius="40px"
+        display={isModalOpen ? 'flex' : 'none'}
+        justifyContent="center"
+        alignItems="center"
+      >
+        <Flex w="600px">
+          {/* TODO 編集できるようにしたい*/}
+          <TextInput value={inputText} onChange={setInputValueToInputText} />
+          <RoundedOutlineButton onClick={setInputTextToRecoilState} />
+        </Flex>
+      </Box>
     </>
   )
 }
