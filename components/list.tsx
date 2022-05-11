@@ -8,20 +8,11 @@ import { textState } from '../recoil/todo'
 type Props = {
   list: string[]
   openModal: () => void
+  deleteTodo: (e: number) => void
 }
 
-export const List: FC<Props> = ({ list, openModal }) => {
+export const List: FC<Props> = ({ list, openModal, deleteTodo }) => {
   const [text, setText] = useRecoilState(textState)
-
-  const removeItemAtIndex = (arr: any[], index: number) => {
-    return [...arr.slice(0, index), ...arr.slice(index + 1)]
-  }
-
-  const deleteTodo = (e: number) => {
-    const newTodos = removeItemAtIndex(text.todos, e)
-
-    setText({ todos: newTodos })
-  }
 
   return (
     <ul>

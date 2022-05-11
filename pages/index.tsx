@@ -33,6 +33,16 @@ const Home: NextPage = () => {
     setIsModalOpen(false)
   }
 
+  const removeItemAtIndex = (arr: any[], index: number) => {
+    return [...arr.slice(0, index), ...arr.slice(index + 1)]
+  }
+
+  const deleteTodo = (e: number) => {
+    const newTodos = removeItemAtIndex(text.todos, e)
+
+    setText({ todos: newTodos })
+  }
+
   // TODO 型定義をtype TextInput を使いたい
   const setInputValueToInputText = (e: ChangeEvent<HTMLInputElement>) => {
     setInputText(e.target.value)
@@ -52,7 +62,7 @@ const Home: NextPage = () => {
           <RoundedOutlineButton onClick={setInputTextToRecoilState} />
         </Flex>
         <br />
-        <List list={text.todos} openModal={openModal} />
+        <List list={text.todos} openModal={openModal} deleteTodo={deleteTodo} />
       </Container>
       <Box
         position="fixed"
