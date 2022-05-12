@@ -5,7 +5,7 @@ import { Box, ButtonGroup, Flex } from '@chakra-ui/react'
 
 type Props = {
   list: string[]
-  openModal: () => void
+  openModal: (e: number) => void
   deleteTodo: (e: number) => void
 }
 
@@ -18,7 +18,7 @@ export const List: FC<Props> = ({ list, openModal, deleteTodo }) => {
             <Flex justifyContent={'space-between'}>
               {i + 1}. {e}
               <ButtonGroup gap="2">
-                <Box onClick={openModal} cursor="pointer">
+                <Box onClick={() => openModal(i)} cursor="pointer">
                   <FontAwesomeIcon icon={faCube} />
                 </Box>
                 <Box onClick={() => deleteTodo(i)} cursor="pointer">

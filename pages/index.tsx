@@ -10,6 +10,8 @@ import { List } from '../components/list'
 const Home: NextPage = () => {
   const [text, setText] = useRecoilState(textState)
   const [inputText, setInputText] = useState('')
+  const [editText, setEditText] = useState('')
+  const [editIndex, setEditIndex] = useState<number>()
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   const escFunction = useCallback(
@@ -25,8 +27,10 @@ const Home: NextPage = () => {
     document.addEventListener('keydown', escFunction)
   }, [escFunction])
 
-  const openModal = () => {
+  const openModal = (i: number) => {
     setIsModalOpen(true)
+    setEditText(text.todos[i])
+    setEditIndex(i)
   }
 
   const closeModal = () => {
@@ -35,6 +39,11 @@ const Home: NextPage = () => {
 
   const removeItemAtIndex = (arr: any[], index: number) => {
     return [...arr.slice(0, index), ...arr.slice(index + 1)]
+  }
+
+  const editItemAtIndex = (arr: any[], index: number | undefined, editedText: string) => {
+    if (index === undefined) return []
+    return [...arr.slice(0, index), editedText, ...arr.slice(index + 1)]
   }
 
   const deleteTodo = (e: number) => {
@@ -48,9 +57,22 @@ const Home: NextPage = () => {
     setInputText(e.target.value)
   }
 
+  const setEditValueToEditText = (e: ChangeEvent<HTMLInputElement>) => {
+    setEditText(e.target.value)
+  }
+
   const setInputTextToRecoilState = () => {
     setText({ todos: [...text.todos, inputText] })
     setInputText('')
+  }
+
+  const setEditTextToRecoilState = () => {
+    setText({ todos: [...text.todos, inputText] })
+    const newTodos = editItemAtIndex(text.todos, editIndex, editText)
+
+    setText({ todos: newTodos })
+    setEditText('')
+    closeModal()
   }
 
   return (
@@ -91,8 +113,8 @@ const Home: NextPage = () => {
       >
         <Flex w="600px">
           {/* TODO 編集できるようにしたい*/}
-          <TextInput value={inputText} onChange={setInputValueToInputText} />
-          <RoundedOutlineButton onClick={setInputTextToRecoilState} />
+          <TextInput value={editText} onChange={setEditValueToEditText} />
+          <RoundedOutlineButton onClick={setEditTextToRecoilState} />
         </Flex>
       </Box>
     </>
