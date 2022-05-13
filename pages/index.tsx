@@ -112,11 +112,11 @@ const Home: NextPage = () => {
         alignItems="center"
       >
         <Flex w="600px">
-          {/* TODO 編集できるようにしたい*/}
           <TextInput value={editText} onChange={setEditValueToEditText} />
           <RoundedOutlineButton onClick={setEditTextToRecoilState} />
         </Flex>
       </Box>
+      {/*  TODO: ページネーションを追加する*/}
     </>
   )
 }
