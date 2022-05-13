@@ -14,6 +14,12 @@ const Home: NextPage = () => {
   const [editIndex, setEditIndex] = useState<number>()
   const [isModalOpen, setIsModalOpen] = useState(false)
 
+  // TODO コード綺麗にしたい
+  // TODO GraphQLとかでバックエンドと通信したい
+  // TODO getServerSideProps とか使いたい
+  // TODO ログイン機能入れたい
+  // TODO DarkMode 入れたい
+
   const escFunction = useCallback(
     (event: KeyboardEvent) => {
       if (event.key === 'Escape' && isModalOpen) {
