@@ -6,6 +6,7 @@ import { ChangeEvent, useCallback, useEffect, useState } from 'react'
 import { RoundedOutlineButton } from '../components/button'
 import { TextInput } from '../components/textInput'
 import { List } from '../components/list'
+import { Modal } from '../components/modal'
 
 const Home: NextPage = () => {
   const [text, setText] = useRecoilState(textState)
@@ -92,36 +93,13 @@ const Home: NextPage = () => {
         <br />
         <List list={text.todos} openModal={openModal} deleteTodo={deleteTodo} />
       </Container>
-      <Box
-        position="fixed"
-        top="0"
-        left="0"
-        w="100%"
-        h="100%"
-        display={isModalOpen ? 'block' : 'none'}
-        bg="blue"
-        opacity="0.3"
-        cursor="pointer"
-        onClick={closeModal}
+      <Modal
+        isModalOpen={isModalOpen}
+        closeModal={closeModal}
+        editText={editText}
+        setEditValueToEditText={setEditValueToEditText}
+        setEditTextToRecoilState={setEditTextToRecoilState}
       />
-      <Box
-        position="fixed"
-        top="50%"
-        left="50%"
-        transform="translateX(-50%) translateY(-50%)"
-        w="700px"
-        h="400px"
-        border="solid 2px white"
-        borderRadius="40px"
-        display={isModalOpen ? 'flex' : 'none'}
-        justifyContent="center"
-        alignItems="center"
-      >
-        <Flex w="600px">
-          <TextInput value={editText} onChange={setEditValueToEditText} />
-          <RoundedOutlineButton onClick={setEditTextToRecoilState} />
-        </Flex>
-      </Box>
       {/*  TODO: ページネーションを追加する*/}
     </>
   )
