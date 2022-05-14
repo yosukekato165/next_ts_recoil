@@ -10,7 +10,7 @@ type ModalProps = {
   setEditValueToEditText: (e: ChangeEvent<HTMLInputElement>) => void
   setEditTextToRecoilState: () => void
 }
-
+// TODO: 引数減らせないかな？
 export const Modal: FC<ModalProps> = ({
   isModalOpen,
   closeModal,

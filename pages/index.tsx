@@ -15,11 +15,11 @@ const Home: NextPage = () => {
   const [editIndex, setEditIndex] = useState<number>()
   const [isModalOpen, setIsModalOpen] = useState(false)
 
-  // TODO コード綺麗にしたい
-  // TODO GraphQLとかでバックエンドと通信したい
-  // TODO getServerSideProps とか使いたい
-  // TODO ログイン機能入れたい
-  // TODO DarkMode 入れたい
+  // TODO: コード綺麗にしたい
+  // TODO: GraphQLとかでバックエンドと通信したい
+  // TODO: getServerSideProps とか使いたい
+  // TODO: ログイン機能入れたい
+  // TODO: DarkMode 入れたい
 
   const escFunction = useCallback(
     (event: KeyboardEvent) => {
@@ -86,6 +86,7 @@ const Home: NextPage = () => {
     <>
       <Container w="700px" margin="20px auto">
         {/*  TODO: 文字列が入っていない時のバリデーションを追加する */}
+        {/* TODO: Modal の input と共通化出来ないのかな? */}
         <Flex>
           <TextInput value={inputText} onChange={setInputValueToInputText} />
           <RoundedOutlineButton onClick={setInputTextToRecoilState} />
