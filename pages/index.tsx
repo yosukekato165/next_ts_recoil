@@ -1,5 +1,5 @@
 import type { NextPage } from 'next'
-import { Box, Container, Flex } from '@chakra-ui/react'
+import { Container, Flex } from '@chakra-ui/react'
 import { useRecoilState } from 'recoil'
 import { textState } from '../recoil/todo'
 import { ChangeEvent, useCallback, useEffect, useState } from 'react'
@@ -20,19 +20,6 @@ const Home: NextPage = () => {
   // TODO: getServerSideProps とか使いたい
   // TODO: ログイン機能入れたい
   // TODO: DarkMode 入れたい
-
-  const escFunction = useCallback(
-    (event: KeyboardEvent) => {
-      if (event.key === 'Escape' && isModalOpen) {
-        setIsModalOpen(false)
-      }
-    },
-    [isModalOpen]
-  )
-
-  useEffect(() => {
-    document.addEventListener('keydown', escFunction)
-  }, [escFunction])
 
   const openModal = (i: number) => {
     setIsModalOpen(true)
