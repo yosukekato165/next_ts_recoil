@@ -22,6 +22,10 @@ const Home: NextPage = () => {
   // TODO: ログイン機能入れたい
   // TODO: DarkMode 入れたい
 
+  // 親コンポーネントがファットになりがち
+  // 親コンポーネントに store としての機能を持たせてしまっているからな気がする。
+  // どこまで recoil で管理するのか考えないとな
+
   const openModal = (i: number) => {
     setIsModalOpen(true)
     setEditText(text.todos[i])
