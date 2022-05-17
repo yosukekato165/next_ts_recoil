@@ -7,7 +7,7 @@ type ModalProps = {
   isModalOpen: boolean
   closeModal: () => void
   editText: string
-  setEditValueToEditText: (e: ChangeEvent<HTMLInputElement>) => void
+  setEditValueToEditText: (e: string) => void
   setEditTextToRecoilState: () => void
 }
 // TODO: 引数減らせないかな？
@@ -46,7 +46,7 @@ export const Modal: FC<ModalProps> = ({
         alignItems="center"
       >
         <Flex w="600px">
-          <TextInput value={editText} onChange={setEditValueToEditText} />
+          <TextInput value={editText} onChange={(e) => setEditValueToEditText(e.target.value)} />
           <RoundedOutlineButton onClick={setEditTextToRecoilState} />
         </Flex>
       </Box>

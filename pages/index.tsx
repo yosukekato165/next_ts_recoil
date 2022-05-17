@@ -7,6 +7,7 @@ import { RoundedOutlineButton } from '../components/button'
 import { TextInput } from '../components/textInput'
 import { List } from '../components/list'
 import { Modal } from '../components/modal'
+import { editItemAtIndex, removeItemAtIndex } from '../utils/array'
 
 const Home: NextPage = () => {
   const [text, setText] = useRecoilState(textState)
@@ -31,28 +32,9 @@ const Home: NextPage = () => {
     setIsModalOpen(false)
   }
 
-  const removeItemAtIndex = (arr: any[], index: number) => {
-    return [...arr.slice(0, index), ...arr.slice(index + 1)]
-  }
-
-  const editItemAtIndex = (arr: any[], index: number | undefined, editedText: string) => {
-    if (index === undefined) return []
-    return [...arr.slice(0, index), editedText, ...arr.slice(index + 1)]
-  }
-
   const deleteTodo = (e: number) => {
     const newTodos = removeItemAtIndex(text.todos, e)
-
     setText({ todos: newTodos })
-  }
-
-  // TODO 型定義をtype TextInput を使いたい
-  const setInputValueToInputText = (e: ChangeEvent<HTMLInputElement>) => {
-    setInputText(e.target.value)
-  }
-
-  const setEditValueToEditText = (e: ChangeEvent<HTMLInputElement>) => {
-    setEditText(e.target.value)
   }
 
   const setInputTextToRecoilState = () => {
@@ -75,7 +57,7 @@ const Home: NextPage = () => {
         {/*  TODO: 文字列が入っていない時のバリデーションを追加する */}
         {/* TODO: Modal の input と共通化出来ないのかな? */}
         <Flex>
-          <TextInput value={inputText} onChange={setInputValueToInputText} />
+          <TextInput value={inputText} onChange={(e) => setInputText(e.target.value)} />
           <RoundedOutlineButton onClick={setInputTextToRecoilState} />
         </Flex>
         <br />
@@ -85,7 +67,7 @@ const Home: NextPage = () => {
         isModalOpen={isModalOpen}
         closeModal={closeModal}
         editText={editText}
-        setEditValueToEditText={setEditValueToEditText}
+        setEditValueToEditText={setEditText}
         setEditTextToRecoilState={setEditTextToRecoilState}
       />
       {/*  TODO: ページネーションを追加する*/}
